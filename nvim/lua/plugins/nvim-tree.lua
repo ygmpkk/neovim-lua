@@ -18,14 +18,10 @@ end
 -- nested options are documented by accessing them with `.` (eg: `:help nvim-tree.view.mappings.list`)
 nvim_tree.setup {
   auto_reload_on_write = true,
-  create_in_closed_folder = false,
   --disable_netrw = false, -> already disabled on `/core/options.lua`
   hijack_cursor = false,
   hijack_netrw = true,
   hijack_unnamed_buffer_when_opening = false,
-  ignore_buffer_on_setup = false,
-  open_on_setup = true,
-  open_on_setup_file = true, -- open nvim-tree when you open any file
   sort_by = "name",
   root_dirs = {},
   prefer_startup_root = false,
@@ -36,9 +32,10 @@ nvim_tree.setup {
   remove_keymaps = false,
   select_prompts = false,
   view = {
-    adaptive_size = false,
     centralize_selection = false,
-    width = 32,
+    cursorline = true,
+    debounce_delay = 15,
+    width = 34,
     hide_root_folder = false,
     side = "left",
     preserve_window_proportions = false,
@@ -86,6 +83,7 @@ nvim_tree.setup {
     icons = {
       webdev_colors = true,
       git_placement = "before",
+      modified_placement = "after",
       padding = " ",
       symlink_arrow = " ➛ ",
       show = {
@@ -93,11 +91,13 @@ nvim_tree.setup {
         folder = true,
         folder_arrow = true,
         git = true,
+        modified = true,
       },
       glyphs = {
         default = "",
         symlink = "",
         bookmark = "",
+        modified = "●",
         folder = {
           arrow_closed = "",
           arrow_open = "",
@@ -139,6 +139,7 @@ nvim_tree.setup {
   diagnostics = {
     enable = false,
     show_on_dirs = false,
+    show_on_open_dirs = true,
     debounce_delay = 50,
     severity = {
       min = vim.diagnostic.severity.HINT,
@@ -153,6 +154,8 @@ nvim_tree.setup {
   },
   filters = {
     dotfiles = false,
+    git_clean = false,
+    no_buffer = false,
     custom = {},
     exclude = {},
   },
@@ -165,7 +168,13 @@ nvim_tree.setup {
     enable = true,
     ignore = true,
     show_on_dirs = true,
+    show_on_open_dirs = true,
     timeout = 400,
+  },
+    modified = {
+    enable = false,
+    show_on_dirs = true,
+    show_on_open_dirs = true,
   },
   actions = {
     use_system_clipboard = true,
@@ -205,7 +214,6 @@ nvim_tree.setup {
   },
   trash = {
     cmd = "gio trash",
-    require_confirm = true,
   },
   live_filter = {
     prefix = "[FILTER]: ",
