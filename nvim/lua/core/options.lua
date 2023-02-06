@@ -23,7 +23,7 @@ opt.completeopt = 'menuone,noinsert,noselect'  -- Autocomplete options
 opt.number = true           -- Show line number
 opt.showmatch = true        -- Highlight matching parenthesis
 opt.foldmethod = 'marker'   -- Enable folding (default 'foldmarker')
-opt.colorcolumn = '80'      -- Line lenght marker at 80 columns
+opt.colorcolumn = '240'      -- Line lenght marker at 80 columns
 opt.splitright = true       -- Vertical split to the right
 opt.splitbelow = true       -- Horizontal split to the bottom
 opt.ignorecase = true       -- Ignore case letters when search
@@ -44,7 +44,7 @@ opt.smartindent = true      -- Autoindent new lines
 -- Memory, CPU
 -----------------------------------------------------------
 opt.hidden = true           -- Enable background buffers
-opt.history = 100           -- Remember N lines in history
+opt.history = 10000           -- Remember N lines in history
 opt.lazyredraw = true       -- Faster scrolling
 opt.synmaxcol = 240         -- Max column for syntax highlight
 opt.updatetime = 250        -- ms to wait for trigger an event

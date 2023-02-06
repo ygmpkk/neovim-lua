@@ -27,7 +27,7 @@ capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
-  --vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Highlighting references.
   -- See: https://sbulav.github.io/til/til-neovim-highlight-references/
@@ -74,20 +74,21 @@ end
 -- Customizing how diagnostics are displayed
 vim.diagnostic.config({
   update_in_insert = true,
+  virtual_text = true,
   float = {
     focusable = false,
     style = "minimal",
     border = "rounded",
     source = "always",
     header = "",
-    prefix = "",
-	},
+    prefix = ""
+  },
 })
 
 -- Show line diagnostics automatically in hover window
-vim.cmd([[
-  autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false })
-]])
+-- vim.cmd([[
+--   autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false })
+-- ]])
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -101,7 +102,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 Language servers setup:
 
 For language servers list see:
-https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+  https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
 Language server installed:
 
