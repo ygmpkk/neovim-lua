@@ -19,10 +19,10 @@ vim.g.mapleader = ','
 -----------------------------------------------------------
 
 -- Disable arrow keys
-map('', '<up>', '<nop>')
-map('', '<down>', '<nop>')
-map('', '<left>', '<nop>')
-map('', '<right>', '<nop>')
+-- map('', '<up>', '<nop>')
+-- map('', '<down>', '<nop>')
+-- map('', '<left>', '<nop>')
+-- map('', '<right>', '<nop>')
 
 -- Map Esc to kk
 -- map('i', 'kk', '<Esc>')
@@ -69,6 +69,7 @@ map('n', '<leader>n', ':NvimTreeFindFile<CR>')      -- search file
 
 -- Tagbar
 map('n', '<leader>z', ':TagbarToggle<CR>')          -- open/close
+map('n', '<leader>t', ':AerialToggle<CR>')          -- open/close
 
 local builtin = require('telescope.builtin')
 -- vim.keymap.set('n', '<leader>fa', ':Ag', {})
@@ -76,3 +77,13 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+local gitblame = require('../plugins/gitblame')
+vim.keymap.set('n', 'U', gitblame.blameVirtText, {})
+-- lua vim.api.nvim_command [[autocmd CursorHold   * lua require'utils'.blameVirtText()]]
+-- lua vim.api.nvim_command [[autocmd CursorMoved  * lua require'utils'.clearBlameVirtText()]]
+
+local hop = require('hop')
+vim.keymap.set('', '<leader>F', function()
+  hop.hint_char1()
+end, {remap=true})

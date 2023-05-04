@@ -28,10 +28,10 @@ end
 
 -- Autocommand that reloads neovim whenever you save the packer_init.lua file
 vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost packer_init.lua source <afile> | PackerSync
-  augroup end
+augroup packer_user_config
+autocmd!
+autocmd BufWritePost packer_init.lua source <afile> | PackerSync
+augroup end
 ]]
 
 -- Use a protected call so we don't error out on first use
@@ -78,6 +78,8 @@ return packer.startup(function(use)
 
   -- LSP
   use 'neovim/nvim-lspconfig'
+  use 'prettier/vim-prettier'
+
 
   -- Autocomplete
   use {
@@ -122,8 +124,43 @@ return packer.startup(function(use)
     requires = { { "nvim-telescope/telescope.nvim" } }
   }
 
-  use('jose-elias-alvarez/null-ls.nvim')
-  use('MunifTanjim/prettier.nvim')
+  use 'dhruvasagar/vim-table-mode'
+  use {
+    'stevearc/aerial.nvim',
+    config = function()
+      require('aerial').setup()
+    end
+  }
+
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v2', -- optional but strongly recommended
+    config = function()
+      -- you can configure Hop the way you like here; see :h hop-config
+      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+    end
+  }
+
+  use {
+    'ethanholz/nvim-lastplace',
+    config = function()
+      require'nvim-lastplace'.setup {
+        lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
+        lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
+        lastplace_open_folds = true
+      }
+    end
+  }
+
+  use {
+    'akinsho/git-conflict.nvim',
+    tag = "*",
+    config = function()
+      require('git-conflict').setup()
+    end
+  }
+
+  use 'vimwiki/vimwiki'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
